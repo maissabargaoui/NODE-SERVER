@@ -1,0 +1,4 @@
+{
+  "database": "mongodb+srv://iproceed:iproceed-cred@cluster0.adwuo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  "token_secret": "token-secret !!"
+}
