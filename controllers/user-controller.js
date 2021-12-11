@@ -7,8 +7,18 @@ const Role = require('../middlewares/role');
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 
-exports.getAllUsers = async (req, res) => {
-    const users = await User.find({});
+exports.getAllInstructors = async (req, res) => {
+    const users = await User.find({ role : Role.Instructor });
+
+    if (users) {
+        res.status(200).send({ users, message: "success" });
+    } else {
+        res.status(403).send({ message: "fail" });
+    }
+};
+
+exports.getById = async (req, res) => {
+    const users = await User.find({ _id : req.body._id });
 
     if (users) {
         res.status(200).send({ users, message: "success" });
@@ -56,7 +66,7 @@ exports.login = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user && (await bcrypt.compare(password, user.password))) {
-       
+
         // token creation
         const token = makeTokenForLogin(user._id, user.role)
 
@@ -73,7 +83,7 @@ exports.login = async (req, res) => {
 
 exports.loginWithSocialApp = async (req, res) => {
 
-    const { email, name } = req.body;
+    const { email, name, role } = req.body;
 
     if (email == "") {
         res.status(403).send({ message: "error please provide an email" });
@@ -91,7 +101,7 @@ exports.loginWithSocialApp = async (req, res) => {
             //user.address = ;
             //user.password = ;
             //user.phone = ;
-            user.role = Role.Student;
+            user.role = role;
             user.isVerified = true;
 
             user.save();
@@ -116,7 +126,7 @@ exports.getUserFromToken = async (req, res) => {
 
         try {
             user = await User.findById(jwt.verify(userToken, config.token_secret)["_id"]);
-        } catch(error){
+        } catch (error) {
             console.log("Error : token invalid")
 
             return res.status(403).send({ message: "Token invalid" });
@@ -135,7 +145,7 @@ exports.getUserFromToken = async (req, res) => {
 }
 
 function makeTokenForLogin(_id, role) {
-    return jwt.sign({ _id: _id, role: role}, config.token_secret, {
+    return jwt.sign({ _id: _id, role: role }, config.token_secret, {
         expiresIn: "99999999999", // in Milliseconds (3600000 = 1 hour)
     });
 }
@@ -310,6 +320,37 @@ exports.editProfile = async (req, res) => {
             }
         }
     );
+
+    res.send({ user });
+};
+
+exports.setLocation = async (req, res) => {
+    const { email, latitude, longitude, address, clear } = req.body;
+
+    let user
+
+    if (clear) {
+        user = await User.findOneAndUpdate(
+            { email: email },
+            {
+                $set: {
+                    latitude: null,
+                    longitude: null
+                }
+            }
+        );
+    } else {
+        user = await User.findOneAndUpdate(
+            { email: email },
+            {
+                $set: {
+                    //address: address,
+                    latitude: latitude,
+                    longitude: longitude
+                }
+            }
+        );
+    }
 
     res.send({ user });
 };
