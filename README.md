@@ -41,4 +41,4 @@ ModifierProfil (PUT):localhost:3000/api.iProceed.com/utilisateur/modifierProfil
 ## Authors 
 Mayssa Bargaoui 
 
-Samir Ben Slimene 
+Samir Slimene 
