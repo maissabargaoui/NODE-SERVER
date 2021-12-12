@@ -67,6 +67,6 @@ https://www.freecodecamp.org/news/securing-node-js-restful-apis-with-json-web-to
 
 ## Contributing
 
-Samir Ben Slimene 
+Samir Ben Slimene  
 
 https://github.com/samirbenslimene
