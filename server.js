@@ -7,20 +7,11 @@ const config = require("./config.json");
 const bodyParser = require("body-parser");
 const path = require("path");
 
-const express = require("express");
-const app = express();
-
-const mongoose = require("mongoose");
-const port = process.env.PORT || 3000;
-const config = require("./config.json");
-const bodyParser = require("body-parser");
-const path = require("path");
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-app.use(express.static('public'));
+app.use(express.static('public'));  
 app.use('/img', express.static('uploads/images'));
 //*************************   swagger */
 const swaggerJSDoc = require('swagger-jsdoc');

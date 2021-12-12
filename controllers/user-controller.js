@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../config.json");
 const Role = require('../middlewares/role');
 
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 
 exports.getAllInstructors = async (req, res) => {

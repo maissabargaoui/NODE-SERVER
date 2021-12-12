@@ -19,6 +19,7 @@ exports.addCourse = async (req, res) => {
     
     newCourse.title = title;
     newCourse.description = description;
+    newCourse.idPhoto = req.file.filename;
     newCourse.save();
 
     res.status(201).send({ course: "success", course: newCourse });
@@ -32,7 +33,8 @@ exports.editCourse = async (req, res) => {
         {
             $set: {
                 title : title,
-                description : description
+                description : description,
+                idPhoto : req.file.filename
             }
         }
     );
