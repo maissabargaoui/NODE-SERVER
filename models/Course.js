@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-//define a new data object
 
 const CourseSchema = new mongoose.Schema(
     {
@@ -7,7 +6,7 @@ const CourseSchema = new mongoose.Schema(
         description: { type: String },
         date: { type: Date },
         idPhoto: { type: String },
-        
+
         user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
@@ -18,6 +17,4 @@ const CourseSchema = new mongoose.Schema(
     }
 );
 
-//we want to export this file to the server so it can see the schema
-//the data is the Course we made
 module.exports = mongoose.model("Course", CourseSchema);
