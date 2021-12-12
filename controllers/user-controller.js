@@ -271,7 +271,7 @@ async function sendPasswordResetEmail(email, token, resetCode) {
         }
     });
 
-    const mailOptions = { 
+    const mailOptions = {
         from: 'iproceed.app@gmail.com',
         to: email,
         subject: 'Reset your password',
