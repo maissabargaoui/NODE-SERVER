@@ -49,8 +49,6 @@ ExpressJS
 ## References 
 https://codewithchris.com/
 
-https://www.youtube.com/playlist?list=PL4MrhxdlD1uvGMofKTpYtH1z70YcWDnSd
-
 https://www.raywenderlich.com/2441-how-to-write-an-ios-app-that-uses-a-node-js-mongodb-web-service
 
 https://www.freecodecamp.org/news/securing-node-js-restful-apis-with-json-web-tokens-9f811a92bb52/
