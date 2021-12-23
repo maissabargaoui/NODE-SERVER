@@ -47,6 +47,7 @@ exports.signup = async (req, res) => {
         newUser.password = mdpEncrypted;
         newUser.phone = phone;
         newUser.role = role;
+        newUser.neverNotified = true;
 
         newUser.save();
 
@@ -133,8 +134,6 @@ exports.getUserFromToken = async (req, res) => {
         }
 
         if (user) {
-            console.log("User extracted from token")
-
             res.status(200).send({ user: user });
         } else {
             console.log("Can't find user with this token")
@@ -305,18 +304,34 @@ exports.editPassword = async (req, res) => {
 };
 
 exports.editProfile = async (req, res) => {
-    const { email, name, address, phone, role } = req.body;
+    const { email, name, address, phone, role, typeInstructeur, prixParCour } = req.body;
 
     let user = await User.findOneAndUpdate(
         { email: email },
         {
             $set: {
                 name: name,
-                //email: email,
                 address: address,
-                //password : password,
                 phone: phone,
-                role: role
+                role: role,
+                typeInstructeur: typeInstructeur,
+                prixParCour: prixParCour,
+            }
+        }
+    );
+
+    res.send({ user });
+};
+
+exports.editNotifications = async (req, res) => {
+    const { email, neverNotified, coursNotifications } = req.body;
+
+    let user = await User.findOneAndUpdate(
+        { email: email },
+        {
+            $set: {
+                neverNotified: neverNotified,
+                coursNotifications: coursNotifications
             }
         }
     );

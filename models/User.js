@@ -12,6 +12,11 @@ const UserSchema = new mongoose.Schema(
                 idPhoto: { type: String },
                 role: { type: String },
                 isVerified: { type: Boolean },
+                typeInstructeur: { type: String },
+                prixParCour: { type: Number },
+
+                neverNotified: { type: Boolean },
+                coursNotifications: { type: Array },
 
                 courses: [{
                         type: mongoose.Schema.Types.ObjectId,

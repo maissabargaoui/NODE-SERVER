@@ -321,6 +321,8 @@ router.put("/setLocation", UserController.setLocation);
 */
 router.delete("/deleteOne", UserController.deleteOne);
 
+router.put("/edit-notifications", UserController.editNotifications)
+
 router.delete("/deleteAll", UserController.deleteAll)
 
 module.exports = router;
