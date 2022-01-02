@@ -8,7 +8,7 @@ const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 
 exports.getAllInstructors = async (req, res) => {
-    const users = await User.find({ role : Role.Instructor });
+    const users = await User.find({ role: Role.Instructor });
 
     if (users) {
         res.status(200).send({ users, message: "success" });
@@ -18,10 +18,10 @@ exports.getAllInstructors = async (req, res) => {
 };
 
 exports.getById = async (req, res) => {
-    const users = await User.find({ _id : req.body._id });
+    const user = await User.findOne({ _id: req.body._id });
 
-    if (users) {
-        res.status(200).send({ users, message: "success" });
+    if (user) {
+        res.status(200).send({ user });
     } else {
         res.status(403).send({ message: "fail" });
     }
@@ -48,6 +48,7 @@ exports.signup = async (req, res) => {
         newUser.phone = phone;
         newUser.role = role;
         newUser.neverNotified = true;
+        newUser.prixParCour = 10;
 
         newUser.save();
 
@@ -104,6 +105,7 @@ exports.loginWithSocialApp = async (req, res) => {
             //user.phone = ;
             user.role = role;
             user.isVerified = true;
+            user.prixParCour = 10;
 
             user.save();
         }
@@ -306,6 +308,13 @@ exports.editPassword = async (req, res) => {
 exports.editProfile = async (req, res) => {
     const { email, name, address, phone, role, typeInstructeur, prixParCour } = req.body;
 
+    var pricePerCourse = prixParCour
+    if ((pricePerCourse == 0) || (!pricePerCourse)) {
+        pricePerCourse = 10
+    } else {
+        console.log(pricePerCourse)
+    }
+
     let user = await User.findOneAndUpdate(
         { email: email },
         {
@@ -315,7 +324,7 @@ exports.editProfile = async (req, res) => {
                 phone: phone,
                 role: role,
                 typeInstructeur: typeInstructeur,
-                prixParCour: prixParCour,
+                prixParCour: pricePerCourse,
             }
         }
     );

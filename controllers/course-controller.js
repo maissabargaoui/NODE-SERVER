@@ -4,22 +4,23 @@ exports.getCourse = async (req, res) => {
 
     var course;
     if (req.body._id) {
-        course = await Course.findById(req.body._id)
+        course = await Course.findById(req.body._id).populate("user")
     } else {
-        course = await Course.find()
+        course = await Course.find().populate("user")
     }
 
     res.status(201).send({ course , message : "Success" })
 }
 
 exports.addCourse = async (req, res) => {
-    const { title , description } = req.body;
+    const { title , description, user } = req.body;
 
     const newCourse = new Course();
     
     newCourse.title = title;
     newCourse.description = description;
     newCourse.idPhoto = req.file.filename;
+    newCourse.user = user;
     newCourse.save();
 
     res.status(201).send({ course: "success", course: newCourse });
