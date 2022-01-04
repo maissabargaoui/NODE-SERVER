@@ -36,13 +36,13 @@ This Repository Contains All Files And Functions To Be Consumed By Our iOS Appli
 
 ## Run iPROCEED With Docker 
 
-1)
+
 Run On Visual Studio Code Terminal  
 
 docker run —t —p EXPOSEPORT:SERVERPORT imagename
 Example : docker run —t —p 8888:3000 iproceed 
 
-2) 
+
 On Docker Desktop 
 
 Start the image container if not started 
