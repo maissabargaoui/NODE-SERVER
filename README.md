@@ -34,23 +34,6 @@ This Repository Contains All Files And Functions To Be Consumed By Our iOS Appli
 
   npm run start
 
-## Run iPROCEED With Docker 
-
-
-Run On Visual Studio Code Terminal  
-
-docker run —t —p EXPOSEPORT:SERVERPORT imagename
-Example : docker run —t —p 8888:3000 iproceed 
-
-
-On Docker Desktop 
-
-Start the image container if not started 
-Open In Browser 
-Run localhost:EXPOSEPORT/docs/
-Example : Run localhost:8888/docs/
-
-
 
 ## Tech Stack
 
